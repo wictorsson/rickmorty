@@ -21,7 +21,6 @@ const url = "https://rickandmortyapi.com/api/character/";
 async function fetchCharacters() {
   const response = await fetch(url);
   const data = await response.json();
-  console.log(data);
 
   data.results.forEach((element) => {
     let src = element.image;
@@ -30,11 +29,8 @@ async function fetchCharacters() {
     let type = element.type;
     let occurrences = element.episode.length;
 
-    console.log(element);
     const card = createCharacterCard(src, name, status, type, occurrences);
 
     cardContainer.append(card);
   });
 }
-
-fetchCharacters();
