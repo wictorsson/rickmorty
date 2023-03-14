@@ -21,6 +21,5 @@ async function fetchCharacters() {
   const data = await response.json();
 
   console.log(data);
-  console.log(data.results[0].name);
 }
 fetchCharacters();
