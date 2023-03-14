@@ -13,15 +13,15 @@ const pagination = document.querySelector('[data-js="pagination"]');
 let maxPage = 1;
 let page = 1;
 const searchQuery = "";
-// comment
-let url = `https://rickandmortyapi.com/api/character/?page=${page}`;
-async function fetchCharacters(pageParameter) {
+
+async function fetchCharacters() {
   const cardContainer = document.querySelector('[data-js="card-container"]');
-  url = `https://rickandmortyapi.com/api/character/?page=${pageParameter}`;
+  let url = `https://rickandmortyapi.com/api/character/?page=${page}`;
   const response = await fetch(url);
   const data = await response.json();
   console.log(data);
   maxPage = data.info.pages;
+  pagination.textContent = page + "/" + maxPage;
   cardContainer.innerHTML = "";
   data.results.forEach((element) => {
     let src = element.image;
@@ -38,16 +38,14 @@ nextButton.addEventListener("click", () => {
   if (page < maxPage) {
     ++page;
   }
-  fetchCharacters(page);
-  pagination.textContent = page + "/" + maxPage;
+  fetchCharacters();
 });
 
 prevButton.addEventListener("click", () => {
   if (page != 1) {
     --page;
   }
-  fetchCharacters(page);
-  pagination.textContent = page + "/" + maxPage;
+  fetchCharacters();
 });
 
-fetchCharacters(page);
+fetchCharacters();
